@@ -1,0 +1,21 @@
+.cart{
+  background-color: #451602;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cart span:nth-of-type(1){
+  margin: 0 10px;
+}
+
+.cart span:nth-of-type(2){
+  background-color: #B03C18;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
