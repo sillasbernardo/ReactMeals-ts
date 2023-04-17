@@ -2,7 +2,7 @@
 
 This is a dummy project to practice React which user can choose meals and add quantity. The selected meals are added to a Shopping Cart where user can add more or remove.
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/Map4ImYB6z4)
+<img src="./Preview/preview.gif" />
 
 
 ## Technologies
