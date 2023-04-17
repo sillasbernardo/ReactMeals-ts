@@ -1,20 +1,34 @@
-import React, { useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import ShoppingItemsContext from "../../../Context/ShoppingItemsContext";
 
-import './MealItem.css';
+import "./MealItem.css";
+import Button from "../../../Utils/Button";
 
-const MealItem = (props) => {
+type MealItemProps = {
+  mealInfo: {
+    title: String;
+    description: String;
+    price: number;
+  };
+};
+
+const MealItem = (props: MealItemProps) => {
   const { title, description, price } = props.mealInfo;
 
-  const amountRef = useRef(null);
+  const amountRef = useRef<HTMLInputElement>(null);
 
   const shoppingItemCtx = useContext(ShoppingItemsContext);
 
   const addMealHandler = () => {
-    const totalPrice = price * parseFloat(amountRef.current.value);
-    
-    
-  }
+    shoppingItemCtx.addItemsToCart({
+      id: Math.random(),
+      title,
+      description,
+      price,
+      amount: amountRef.current!.valueAsNumber,
+    });
+    amountRef.current!.value = "";
+  };
 
   return (
     <div className="meal-item">
@@ -28,10 +42,10 @@ const MealItem = (props) => {
           <span>Amount</span>
           <input ref={amountRef} type="number" />
         </div>
-        <button onClick={addMealHandler}>+Add</button>
+        <Button onClick={addMealHandler}>+Add</Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default MealItem;

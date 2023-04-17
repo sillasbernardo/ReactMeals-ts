@@ -1,0 +1,48 @@
+.checkout-item-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  height: 70px;
+  user-select: none;
+  border-bottom: 1px solid #B03C18;
+}
+
+.c-i-c-left>.title{
+  font-weight: bold;
+  font-size: 14pt;
+}
+
+.c-i-c-left>div{
+  margin-top: 10px;
+}
+
+.c-i-c-left>div>span:nth-of-type(1){
+  color: #b45201;
+  font-weight: bold;
+}
+
+.c-i-c-left>div>span:nth-of-type(2){
+  margin-left: 50px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+.c-i-c-right{
+  display: inherit;
+  align-items: center;
+  width: 75px;
+  justify-content: space-between;
+}
+
+.c-i-c-right button{
+  border-style: none;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 3px 12px;
+  font-size: 14pt;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

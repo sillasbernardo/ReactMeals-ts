@@ -1,6 +1,7 @@
-import React, { ReactNode, SetStateAction } from "react";
+import React from "react";
 
 export type ShoppingItems = {
+  id: number,
   title: String,
   description: String,
   price: number,
@@ -9,9 +10,11 @@ export type ShoppingItems = {
 
 export interface ShoppingItemsInterface {
   shoppingItems: ShoppingItems[];
-  setShoppingItems?: React.Dispatch<SetStateAction<ShoppingItems[]>>
+  addItemsToCart: (currentItems:ShoppingItems) => void;
+  updateItemsInCart: (id: number, amount: number) => void;
+  removeItem: (id: number) => void;
 }
 
 export type PropsType = {
-  children: ReactNode
+  children: React.ReactNode
 }

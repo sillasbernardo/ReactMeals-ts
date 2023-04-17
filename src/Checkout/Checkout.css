@@ -1,0 +1,31 @@
+.checkout-container{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.checkout-info{
+  margin: 10px 0;
+  font-size: 14pt;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-btn{
+  float: right;
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
+}
+
+.checkout-close-btn{
+  background-color: white !important;
+  color: black !important;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
