@@ -10,12 +10,12 @@ type CheckoutProps = {
 };
 
 const Checkout = (props: CheckoutProps) => {
-  const shoopingItemsCtx = useContext(ShoppingItemsContext);
+  const shoppingItemsCtx = useContext(ShoppingItemsContext);
 
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const itemTotalPrice = shoopingItemsCtx.shoppingItems.map((item) => {
+    const itemTotalPrice = shoppingItemsCtx.shoppingItems.map((item) => {
       return parseFloat((item.amount * item.price).toFixed(2));
     });
 
@@ -26,18 +26,16 @@ const Checkout = (props: CheckoutProps) => {
         })
       );
     }
-  }, [shoopingItemsCtx.shoppingItems]);
+  }, [shoppingItemsCtx.shoppingItems]);
 
   const checkoutOrderHandler = () => {
-    console.log(`
-      Sending order: ${shoopingItemsCtx.shoppingItems}
-    `);
+    
   };
 
   return (
     <div className="checkout-container">
       <div>
-        {shoopingItemsCtx.shoppingItems.map((item, index) => {
+        {shoppingItemsCtx.shoppingItems.map((item, index) => {
           return (
             <CheckoutItem
               key={index}

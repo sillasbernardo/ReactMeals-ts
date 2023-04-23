@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState, SyntheticEvent } from "react";
 import ShoppingItemsContext from "../../../Context/ShoppingItemsContext";
 
 import "./MealItem.css";
@@ -19,7 +19,14 @@ const MealItem = (props: MealItemProps) => {
 
   const shoppingItemCtx = useContext(ShoppingItemsContext);
 
+  const [isError, setIsError] = useState(false);
+
   const addMealHandler = () => {
+    if (!amountRef.current!.value){
+      setIsError(true);
+      return;
+    }
+
     shoppingItemCtx.addItemsToCart({
       id: Math.random(),
       title,
@@ -29,6 +36,12 @@ const MealItem = (props: MealItemProps) => {
     });
     amountRef.current!.value = "";
   };
+
+  const inputChangeHandler = () => {
+    if (amountRef.current!.valueAsNumber){
+      setIsError(false);
+    }
+  }
 
   return (
     <div className="meal-item">
@@ -40,7 +53,8 @@ const MealItem = (props: MealItemProps) => {
       <div className="meal-item-right-info">
         <div className="right-info-2">
           <span>Amount</span>
-          <input ref={amountRef} type="number" />
+          <input onChange={inputChangeHandler} ref={amountRef} type="number" />
+          {isError && <p>Amount can't be empty.</p>}
         </div>
         <Button onClick={addMealHandler}>+Add</Button>
       </div>

@@ -39,6 +39,13 @@
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
+.right-info-2 p{
+  color: red;
+  font-size: 10pt;
+  text-align: center;
+  margin: 0;
+}
+
 .meal-item-right-info{
   display: inherit;
   flex-direction: column;
