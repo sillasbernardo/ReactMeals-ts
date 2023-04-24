@@ -1,7 +1,8 @@
-import { BaseSyntheticEvent, useContext, useEffect } from 'react';
+import { BaseSyntheticEvent, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import './CheckoutItem.css';
-import ShoppingItemsContext from '../../Context/ShoppingItemsContext';
+import { shoppingItemsReduxActions } from '../../store/ShoppingItemsSlice';
 
 type CheckoutItemProps = {
   id: number,
@@ -12,19 +13,28 @@ type CheckoutItemProps = {
 }
 
 const CheckoutItem = (props: CheckoutItemProps) => {
-  const shoppingItemCtx = useContext(ShoppingItemsContext);
+
+  const dispatch = useDispatch();
 
   const amountHandler = (event: BaseSyntheticEvent) => {
     if (event.target.innerText === "+" && props.amount > 0){
-      shoppingItemCtx.updateItemsInCart(props.id, props.amount + 1);
+      dispatch(shoppingItemsReduxActions.updateItems({
+        id: props.id,
+        amount: props.amount + 1
+      }));
     } else if (event.target.innerText === "-" && props.amount > 0) {
-      shoppingItemCtx.updateItemsInCart(props.id, props.amount - 1);
+      dispatch(shoppingItemsReduxActions.updateItems({
+        id: props.id,
+        amount: props.amount - 1
+      }));
     }
   }
 
   useEffect(() => {
     if (props.amount == 0){
-      shoppingItemCtx.removeItem(props.id);
+      dispatch(shoppingItemsReduxActions.removeItems({
+        id: props.id
+      }))
     }
   }, [amountHandler])
 

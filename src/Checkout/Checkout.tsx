@@ -1,21 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import "./Checkout.css";
 import Button from "../Utils/Button";
 import CheckoutItem from "./CheckoutItem/CheckoutItem";
-import ShoppingItemsContext from "../Context/ShoppingItemsContext";
+
+// Type
+import { ShoppingItems } from "../store/ShoppingItemsSlice";
 
 type CheckoutProps = {
   onCheckoutCartClose: () => void;
 };
 
+type RootType = {
+  shoppingItemSlice: {
+    items: ShoppingItems[]
+  }
+}
+
 const Checkout = (props: CheckoutProps) => {
-  const shoppingItemsCtx = useContext(ShoppingItemsContext);
+  //const shoppingItemsCtx = useContext(ShoppingItemsContext);
+
+  const shoppingItemsState = useSelector((state: RootType) => state.shoppingItemSlice);
 
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const itemTotalPrice = shoppingItemsCtx.shoppingItems.map((item) => {
+    const itemTotalPrice = shoppingItemsState.items.map((item) => {
       return parseFloat((item.amount * item.price).toFixed(2));
     });
 
@@ -26,7 +37,7 @@ const Checkout = (props: CheckoutProps) => {
         })
       );
     }
-  }, [shoppingItemsCtx.shoppingItems]);
+  }, [shoppingItemsState.items]);
 
   const checkoutOrderHandler = () => {
     
@@ -35,7 +46,7 @@ const Checkout = (props: CheckoutProps) => {
   return (
     <div className="checkout-container">
       <div>
-        {shoppingItemsCtx.shoppingItems.map((item, index) => {
+        {shoppingItemsState.items.map((item, index) => {
           return (
             <CheckoutItem
               key={index}

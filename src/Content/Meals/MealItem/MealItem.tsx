@@ -1,8 +1,9 @@
-import { useRef, useContext, useState, SyntheticEvent } from "react";
-import ShoppingItemsContext from "../../../Context/ShoppingItemsContext";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import "./MealItem.css";
 import Button from "../../../Utils/Button";
+import { shoppingItemsReduxActions } from "../../../store/ShoppingItemsSlice";
 
 type MealItemProps = {
   mealInfo: {
@@ -17,7 +18,7 @@ const MealItem = (props: MealItemProps) => {
 
   const amountRef = useRef<HTMLInputElement>(null);
 
-  const shoppingItemCtx = useContext(ShoppingItemsContext);
+  const dispatch = useDispatch();
 
   const [isError, setIsError] = useState(false);
 
@@ -27,13 +28,15 @@ const MealItem = (props: MealItemProps) => {
       return;
     }
 
-    shoppingItemCtx.addItemsToCart({
-      id: Math.random(),
-      title,
-      description,
-      price,
-      amount: amountRef.current!.valueAsNumber,
-    });
+    dispatch(shoppingItemsReduxActions.addItemsToCart({
+      currentItem: {
+        id: Math.random(),
+        title,
+        description,
+        price,
+        amount: amountRef.current!.valueAsNumber,
+      }
+    }))
     amountRef.current!.value = "";
   };
 

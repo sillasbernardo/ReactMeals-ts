@@ -1,20 +1,29 @@
 import { FaShoppingCart } from "react-icons/fa"
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import "./Cart.css";
-import ShoppingItemsContext from "../../Context/ShoppingItemsContext";
+import { ShoppingItems } from "../../store/ShoppingItemsSlice";
 
 type CartProps = {
   onCheckoutCartOpen: () => void;
 }
 
+type RootType = {
+  shoppingItemSlice: {
+    items: ShoppingItems[]
+  }
+}
+
 const Cart = (props:CartProps) => {
-  const shoppingItemsCtx = useContext(ShoppingItemsContext);
+  //const shoppingItemsCtx = useContext(ShoppingItemsContext);
+
+  const shoppingItemsState = useSelector((state: RootType) => state.shoppingItemSlice);
 
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    const itemsAmountArray = shoppingItemsCtx.shoppingItems.map(items => {
+    const itemsAmountArray = shoppingItemsState.items.map(items => {
       return items.amount;
     })
 
@@ -26,7 +35,7 @@ const Cart = (props:CartProps) => {
 
       setTotalAmount(sumOfAmounts);
     }
-  }, [shoppingItemsCtx.shoppingItems])
+  }, [shoppingItemsState.items])
 
   return (
     <div className="cart" onClick={props.onCheckoutCartOpen}>
